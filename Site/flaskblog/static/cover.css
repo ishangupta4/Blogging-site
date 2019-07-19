@@ -1,0 +1,31 @@
+*{
+	margin:0;
+	padding:0;
+}
+body{
+	color: #fff;
+	font-family: 'Indie Flower', cursive;
+}
+#Logo{
+	height:120px;
+	width:120px;
+	color:white;
+}
+.head-con{
+	text-align: center;
+}
+.bg-color{
+	background-color:#313131;
+}
+.cover-row1{
+	height:65vh;
+	z-index:2;
+}
+.btn-lg{
+	width: 300px;
+}
+.cover-row2{
+	margin-left: 5px;
+	height:20vh;
+	text-align: center;
+}

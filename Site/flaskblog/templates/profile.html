@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="content-section">
+        <div class="media">
+            <img class="rounded-circle account-img" src="{{ image_file }}"></img>
+            <div class="media-body">
+                <h2 class="account-heading">{{ user.username }}</h2>
+                <a class="no-color" href="{{ url_for('user_posts', username=user.username) }}"><span class="ml-2"></span><strong>{{posts_count}}</strong> posts</span></a>
+                <span class="ml-2">{{ user.connections }} connections</span>
+                <br>
+                <button type="button" class="btn btn-info btn-sm mt-3"><a href="{{ url_for('connections',user_id=user.id) }}">Connect</a></button>
+            </div>
+        </div>
+    </div>
+    <div class="row border-top">
+        <h1>Hello</h1>
+    </div>    
+    </div>
+
+{% endblock content %}

@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12" style="text-align: center;">
+                <h1><u> AMU CLUBS</u></h1>
+                <div class="row mt-3">
+                    <div class="container">
+                        <a href="https://amuroboclub.in">
+                            <img class="club_cover" src="{{ url_for('static', filename='profile_pics/roboclub.png')}}" alt="RoboClub">
+                            <h3>AMU ROBOCLUB</h3>
+                        </a>
+                        <p>AMU Roboclub is a student’s body which caters to the need of electronics enthusiasts and hobbyists in creating an environment which is driven by innovation and implementation. Run under the able guidance and supervision of faculty advisors from various branches of engineering, AMU Roboclub stands as an epitome of marvel. It not only acts as a platform for zealous students to hone their skills in the field of Electrical, Electronics, Computers and Mechanical but also prepares them for various national competitions by encouraging participation.</p>   
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="container">
+                        <a href="http://auvzhcet.in">
+                            <img class="club_cover" src="{{ url_for('static', filename='profile_pics/auvclub.png')}}" alt="AUVClub">
+                            <h3>AUV ZHCET</h3>
+                        </a>
+                        <p>A group of dedicated students of Zakir Husain College of Engineering & Technology have been working on Autonomous Underwater Vehicles for the past 5 years. Now it is upon our shoulders to carry their mission forward. We have created the students chapter Autonomous Underwater Vehicle- Zakir Husain College of Engineering & Technology (AUV-ZHCET) which will give us the platform we need. Our club gives aspiring engineers an opportunity to explore the depths of the oceans and the fields of mechanical, electronics and computer engineering. The students will learns the skills of underwater robotics and Artificial Intelligence. We have won a few competitions and received a lot of appreciation for our designs in particular. We are targeting several other competions nationally and internationally like SAVe, SAUVC and ROBOSUB. To design and fabricate the AUV we have formed 4 multidisciplinary teams - working on the same goal.</p>   
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="container">
+                        <a href="http://saezhcet.com/">
+                            <img class="club_cover" id="saeclub_cover" src="{{ url_for('static', filename='profile_pics/saeclub.png')}}" alt="SAEClub">
+                            <h3>SAE ZHCET</h3>
+                        </a>
+                        <p>‘SAE-ZHCET Collegiate Club’ is a student chapter associated with SAE-INDIA. It was founded in 2012, by the students of 3rd-year Mechanical Engineering. The purpose of its foundation in ZHCET was to encourage the college students towards automobile world and its vast engineering scope. Now, this club consists of 100+ student members of ZHCET, actively participating in workshops, lectures and Industrial visits conducted by the club.</p>   
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
