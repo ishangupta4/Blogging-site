@@ -209,30 +209,31 @@ def profile(username):
     user = User.query.filter_by(username=username).first()
     posts_count = len(Post.query.filter_by(user_id=user.id).all())
     connections = user.connections
+    connected_users = user.connected_users
     image_file = url_for('static', filename='profile_pics/' + user.image_file)
-    return render_template('profile.html', user=user, image_file=image_file, posts_count=posts_count, connections = connections)
+    return render_template('profile.html', user=user, image_file=image_file, 
+                           posts_count=posts_count, connections = connections, connected_users= connected_users)
 
 
-@app.route("/conections/<int:user_id>", methods=['POST', 'GET'])
+@app.route("/connections/<int:user_id>")
 @login_required
 def connections(user_id):
-    user = User.query.get_or_404(user_id) 
+    user = User.query.get_or_404(user_id)
     lst = list(map(int,user.connected_users.split()))
-    lst_current = list(map(int,current_user.connected_users.split()))
-    if current_user.username in lst:
-        user.connections -= 1
-        current_user.connections -= 1
-        lst_current.remove(user.username)
-        lst.remove(current_user.username)
-        flash('Disconnected!', 'danger')
-    else:         
-        lst.append(current_user.username)
-        user.connections += 1
-        current_user.connections += 1
-        lst_current.append(user.username)
-        flash('Connected!', 'success')
+    current_lst = list(map(int,current_user.connected_users.split()))
+    if current_user.id in lst:
+        user.connections -=1
+        current_user.connections -=1
+        lst.remove(current_user.id)
+        current_lst.remove(user.id)
+    else:
+        user.connections +=1
+        current_user.connections +=1
+        lst.append(current_user.id)
+        current_lst.append(user.id)
     lst = list(map(str,lst))
+    current_lst=list(map(str,current_lst))
     user.connected_users = " ".join(lst)
-    current_user.connected_users = " ".join(lst_current)
+    current_user.connected_users = " ".join(current_lst)
     db.session.commit()
-    return redirect('profile.html')
+    return redirect(url_for('profile', username = user.username))

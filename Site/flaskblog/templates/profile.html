@@ -8,13 +8,14 @@
                 <a class="no-color" href="{{ url_for('user_posts', username=user.username) }}"><span class="ml-2"></span><strong>{{posts_count}}</strong> posts</span></a>
                 <span class="ml-2">{{ user.connections }} connections</span>
                 <br>
-                <button type="button" class="btn btn-info btn-sm mt-3"><a href="{{ url_for('connections',user_id=user.id) }}">Connect</a></button>
+                <button type="button" class="btn btn-info btn-sm mt-3"><a href="{{ url_for('connections', user_id = user.id) }}">Connect</a></button>
             </div>
         </div>
     </div>
     <div class="row border-top">
         <h1>Hello</h1>
-    </div>    
+    </div>
+    <h6>My connections are: {{  user.connected_users }} </h6>    
     </div>
 
 {% endblock content %}
