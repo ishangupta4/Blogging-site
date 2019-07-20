@@ -10,7 +10,11 @@
                     <img class="rounded-circle article-img" src="{{ url_for('static', filename='profile_pics/' + comment.author.image_file) }}">
                     <div class="media-body">
                         <div class="article-metadata">
-                        <a class="mr-2" href="{{ url_for('user_posts', username=comment.author.username) }}">{{ comment.author.username }}</a>
+                            {% if current_user.username != comment.author.username %}
+                            <a class="mr-2" href="{{ url_for('profile', username=comment.author.username) }}">{{ comment.author.username }}</a>
+                            {% else %}  
+                            <a class="mr-2" href="{{ url_for('account') }}">{{ comment.author.username }}</a>
+                            {% endif %}
                         <small class="text-muted">{{ comment.date_posted.strftime('%Y-%m-%d') }}</small>
                         </div>
                         <p class="article-content">{{ comment.content }}</p>

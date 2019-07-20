@@ -14,9 +14,17 @@
             </div>
             <h2><a class="article-title" href="{{ url_for('post', post_id=post.id) }}">{{ post.title }}</a></h2>
             <p class="article-content">{{ post.content }}</p>
-            <div class="like-btn-box border-top pt-3"> 
-              <a href="{{ url_for('likes', post_id=post.id) }}"><i class="far fa-thumbs-up ml-3"> {{ post.likes }} Likes</i></a>
-              <a class="comment" href="{{ url_for('comments', post_id=post.id) }}"><i class="far fa-comment ml-3"></i> Comment</i></a>
+            <div class="like-btn-box border-top pt-2">
+              <div class="row">
+                <div class="col">
+                  <a href="{{ url_for('likes', post_id=post.id) }}"><i class="far fa-thumbs-up ml-3"></i></a><br>
+                  <a class="no-color" href="{{ url_for('user_list', content='like', id=post.id) }}"><span><strong>{{post.likes}}</strong> Likes</span></a>
+                </div>
+                <div class="col">
+                  <a class="comment" href="{{ url_for('comments', post_id=post.id) }}"><i class="far fa-comment ml-4"></i></a><br>
+                  <a class="no-color" href="{{ url_for('comments', post_id=post.id) }}"><span><strong></strong> Comments</span></a>
+                </div>
+              </div>
             </div>
           </div>
         </article>

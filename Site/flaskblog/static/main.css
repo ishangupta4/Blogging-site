@@ -102,6 +102,9 @@ body {
   a.no-color {
     color:black;
   }
+  a.white-hover:hover{
+    color:white;
+  }
 
 @media(max-width:767px){
   .account-heading {

@@ -3,8 +3,8 @@ import secrets
 from PIL import Image
 from flask import render_template, url_for, flash, redirect, request, abort
 from flaskblog import app, db, bcrypt
-from flaskblog.forms import RegistrationForm, LoginForm, UpdateAccountForm, PostForm, CommentForm
-from flaskblog.models import User, Post, Comment
+from flaskblog.forms import RegistrationForm, LoginForm, UpdateAccountForm, PostForm, CommentForm, MessageForm
+from flaskblog.models import User, Post, Comment, Message
 from flask_login import login_user, current_user, logout_user, login_required
 
 
@@ -97,8 +97,8 @@ def account():
     elif request.method == 'GET':
         form.username.data = current_user.username
         form.email.data = current_user.email
-    connections = current_user.connections
     image_file = url_for('static', filename='profile_pics/' + current_user.image_file)
+    connections = current_user.connections
     return render_template('account.html', title='Account',
                            image_file=image_file, form=form, posts_count=posts_count, connections = connections)
 
@@ -211,9 +211,12 @@ def profile(username):
     connections = user.connections
     connected_users = user.connected_users
     image_file = url_for('static', filename='profile_pics/' + user.image_file)
-    return render_template('profile.html', user=user, image_file=image_file, 
-                           posts_count=posts_count, connections = connections, connected_users= connected_users)
-
+    current_lst = list(map(int,current_user.connected_users.split()))
+    if user.id in current_lst:
+        is_connected = True
+    else:
+        is_connected = False
+    return render_template('profile.html', user=user, image_file=image_file, posts_count=posts_count, connections = connections, connected_users= connected_users, is_connected=is_connected)
 
 @app.route("/connections/<int:user_id>")
 @login_required
@@ -237,3 +240,44 @@ def connections(user_id):
     current_user.connected_users = " ".join(current_lst)
     db.session.commit()
     return redirect(url_for('profile', username = user.username))
+
+@app.route("/user_list/<string:content>/<int:id>", methods=['POST', 'GET'])
+@login_required
+def user_list(content, id):
+    if content=='like':
+        post = Post.query.filter_by(id=id).first()
+        liked_users = post.liked_users
+        lst = list(map(int,liked_users.split()))
+        legend="User Likes"
+    elif content=='connections':
+        user = User.query.filter_by(id=id).first()
+        connected_users = user.connected_users
+        lst = list(map(int,connected_users.split()))
+        legend="Connections"
+    users=[]
+    for i in lst:
+        user_1 = User.query.filter_by(id=i).first()
+        users.append(user_1)        
+    for user in users:
+        current_lst = list(map(int,current_user.connected_users.split()))
+        if user.id in current_lst:
+            user.email =1
+        elif user.id == current_user.id:
+            user.email =2
+        else:  
+            user.email =3 
+    return render_template('user_list.html', users=users, legend=legend)    
+
+@app.route("/messages/<int:user_id>", methods=['POST', 'GET'])
+@login_required
+def messages(user_id):
+    user = User.query.get_or_404(user_id)
+    form = MessageForm()
+    if form.validate_on_submit():
+        message = Message(message=form.content.data, user_id=user.id)
+        db.session.add(message)
+        db.session.commit()
+        flash('Message sent successfully!', 'success')
+        return redirect(url_for('messages',user_id=user.id))
+    messages=Message.query.filter_by(user_id=user.id).all()
+    return render_template('messages.html', user = user, messages = messages, legend = 'Messages', form = form)

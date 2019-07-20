@@ -3,19 +3,30 @@
     <div class="content-section">
         <div class="media">
             <img class="rounded-circle account-img" src="{{ image_file }}"></img>
-            <div class="media-body">
+            <div class="media-body mb-3">
                 <h2 class="account-heading">{{ user.username }}</h2>
-                <a class="no-color" href="{{ url_for('user_posts', username=user.username) }}"><span class="ml-2"></span><strong>{{posts_count}}</strong> posts</span></a>
-                <span class="ml-2">{{ user.connections }} connections</span>
-                <br>
-                <button type="button" class="btn btn-info btn-sm mt-3"><a href="{{ url_for('connections', user_id = user.id) }}">Connect</a></button>
+                <a class="no-color mr-3" href="{{ url_for('messages', user_id=user.id )}}"><button type="button" class="btn btn-outline-info btn-sm mt-3">Message</button></a>
+                {% if is_connected%}
+                    <button type="button" class="btn btn-outline-danger btn-sm mt-3"><a class="no-color white-hover" href="{{ url_for('connections', user_id = user.id) }}">Disconnect</a></button>
+                {% else %}
+                    <button type="button" class="btn btn-outline-success btn-sm mt-3"><a class="no-color white-hover" href="{{ url_for('connections', user_id = user.id) }}">Connect</a></button>
+                {% endif %}
             </div>
         </div>
+        <div class="row border-top border-bottom justify-content-between">
+            <div class="col" style="text-align: center;">
+                <div>
+                    <a class="no-color" href="{{ url_for('user_posts', username=user.username) }}"><span><strong>{{posts_count}}</strong><br> posts</span></a>
+                </div>
+            </div>
+            <div class="col" style="text-align: center;">
+                <div>
+                    <a class="no-color" href="{{ url_for('user_list', content='connections', id=user.id) }}"><span><strong>{{connections}}</strong><br> connections</span></a>
+                </div>  
+            </div>
+        </div>       
     </div>
-    <div class="row border-top">
-        <h1>Hello</h1>
-    </div>
-    <h6>My connections are: {{  user.connected_users }} </h6>    
+
     </div>
 
 {% endblock content %}
