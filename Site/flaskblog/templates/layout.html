@@ -28,6 +28,7 @@
             <div class="navbar-nav mr-auto">
               <a class="nav-item nav-link" href="{{ url_for('home') }}"><i class="fas fa-home"></i> Home</a>
               <a class="nav-item nav-link" href="{{ url_for('about') }}"><i class="fas fa-question"></i> About</a>
+              <a class="nav-item nav-link" data-toggle="modal" href="#SearchModal"><i class="fas fa-search"></i> Search User</a>
             </div>
             <!-- Navbar Right Side -->
             <div class="navbar-nav">
@@ -56,6 +57,31 @@
         </div>
       </nav>
     </header>
+
+      <!-- Modal -->
+    <div class="modal fade" id="SearchModal" role="dialog">
+      <div class="modal-dialog">
+      
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Search User</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+            <form method="POST" action="{{url_for('search')}}">
+                <input type="text" name="name" placeholder="Username or email" style="border-radius:20px;outline:none;padding:5px;">
+                <input type="submit" name="search" value="search"/>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+
     <main role="main" class="container">
       <div class="row">
         <div class="col-md-12">

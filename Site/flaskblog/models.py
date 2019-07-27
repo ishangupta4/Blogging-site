@@ -18,7 +18,6 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(60), nullable=False)
     posts = db.relationship('Post', backref='author', lazy=True)
     comments = db.relationship('Comment', backref='author', lazy=True)
-    messages = db.relationship('Message', backref='author', lazy=True)
 
     def __repr__(self):
         return f"User('{self.username}', '{self.email}', '{self.image_file}')"
@@ -52,7 +51,8 @@ class Message(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     date_of_message = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     message = db.Column(db.Text, nullable = False)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    receiver_id = db.Column(db.Integer, nullable=False)
+    sender_id = db.Column(db.Integer, nullable=False)
 
     def __repr__(self):
-        return f"Message('{self.date_of_message}','{self.user_id}')"
+        return f"Message('{self.date_of_message}','{self.receiver_id}')"        

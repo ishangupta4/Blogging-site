@@ -106,6 +106,12 @@ body {
     color:white;
   }
 
+.user-msg-shade{
+  background-color: #cbd5db;
+  /* background-color: #e3e3e3; */
+  /* background-color: antiquewhite; */
+}
+
 @media(max-width:767px){
   .account-heading {
     font-size: 1.5rem;

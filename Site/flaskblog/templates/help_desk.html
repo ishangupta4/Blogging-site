@@ -7,8 +7,51 @@
             </div>
         </div>
         <div class="row mt-5">
-            <h3><i class="fas fa-map-marked-alt"></i> Important Locations</h3>
+            <li class="nav-item dropdown" style="list-style-type:none;">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <h3><i class="fas fa-map-marked-alt"></i> Important Locations</h3>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" data-toggle="modal" href="#1Modal"><i class="fas fa-map-marker-alt"></i> ZHCET</a>
+                    <a class="dropdown-item" data-toggle="modal" href="#2Modal"><i class="fas fa-map-marker-alt"></i> Library</a>
+                    <a class="dropdown-item" data-toggle="modal" href="#3Modal"><i class="fas fa-map-marker-alt"></i> Computer Center</a>
+                    <a class="dropdown-item" data-toggle="modal" href="#4Modal"><i class="fas fa-map-marker-alt"></i> NRSC</a>
+                    <a class="dropdown-item" data-toggle="modal" href="#4Modal"><i class="fas fa-map-marker-alt"></i> AMU ROBOCLUB</a>
+            </li>
         </div>
-    </div>
+        {% set ids=[1,2,3,4,5] %}
+        {% for id in ids %}
+            <!-- Modal -->
+            <div class="modal fade modal-map" id="{{ id }}Modal" role="dialog">
+                <div class="modal-dialog">
+                
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Location</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            {% if id == 1 %}
+                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3525.580017085725!2d78.07419031493568!3d27.91485878270641!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3974a4fcb0ea6ddb%3A0x765b62941f223b8e!2sZakir+Husain+College+of+Engineering+and+Technology%2C+AMU!5e0!3m2!1sen!2sin!4v1563941887286!5m2!1sen!2sin" width="95%" height="85%" frameborder="0" style="border:0" allowfullscreen></iframe>
+                            {% elif id== 2 %}
+                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3525.6746028273083!2d78.07296881493568!3d27.911957282707597!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3974a4fb3fccf2ff%3A0xefc4bb278f57e626!2sMaulana+Azad+Library!5e0!3m2!1sen!2sin!4v1563944190287!5m2!1sen!2sin" width="95%" height="85%" frameborder="0" style="border:0" allowfullscreen></iframe>
+                            {% elif id== 3 %}
+                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3525.532777877979!2d78.07111441493574!3d27.916307782705903!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3974a4fc54a05371%3A0x1976773b0e041e19!2sComputer+Centre+AMU!5e0!3m2!1sen!2sin!4v1563946009302!5m2!1sen!2sin" width="95%" height="85%" frameborder="0" style="border:0" allowfullscreen></iframe>
+                            {% elif id== 4 %}
+                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3525.756718671996!2d78.07228621493564!3d27.90943808270858!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3974a4faed89a7bb%3A0xd664a0cb1e615291!2sNRSC+Provost+Office!5e0!3m2!1sen!2sin!4v1563946175588!5m2!1sen!2sin" width="95%" height="85%" frameborder="0" style="border:0" allowfullscreen></iframe>
+                            {% elif id== 5 %}    
+                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3525.5974027633906!2d78.07493051493564!3d27.914325482706648!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3974a4e350ff3bd7%3A0x56f1c0681905618c!2sAMU+Robo+Club+Rd%2C+Aligarh%2C+Uttar+Pradesh+202001!5e0!3m2!1sen!2sin!4v1563946454517!5m2!1sen!2sin" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+                            {% endif %}
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                </div>
+                
+                </div>
+            </div>
+        {% endfor %}    
+        </div>
 
 {% endblock content %}

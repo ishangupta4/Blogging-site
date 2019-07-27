@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="content-section">
+        <legend class="border-bottom mb-4">{{ legend }}</legend>
+        {% for user in username_list %}    
+            <div class="row">
+                <div class="col-md-12">
+                    <article class="media content-section">
+                        <img class="rounded-circle article-img" src="{{ url_for('static', filename='profile_pics/' + user.image_file) }}">
+                        <div class="media-body">
+                            {% if user.username != current_user.username %}
+                                <a class="mr-2" href="{{ url_for('profile', username=user.username) }}"><h5>{{ user.username }}</h3></a>
+                            {% else %}
+                                <a class="mr-2" href="{{ url_for('account') }}"><h5>{{ user.username }}</h3></a>
+                            {% endif%}
+                        </div>    
+                    </article>
+                </div>
+            </div>
+            
+        {% endfor %}
+    </div>
+{% endblock content %}

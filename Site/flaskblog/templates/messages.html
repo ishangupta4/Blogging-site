@@ -4,7 +4,32 @@
         <form method="POST" action="">
             {{ form.hidden_tag() }}
             <fieldset class="form-group">
-                <legend class="border-bottom mb-4">{{ legend }} {{ current_user.username }} with {{ user.username }}</legend>
+                <legend class="border-bottom mb-4">{{ legend }}</legend>
+                {% for message in messages|sort(attribute='id') %}
+                    {% if message.sender_id == current_user.id %}
+                        <article class="media content-section user-msg-shade">
+                            <img class="rounded-circle article-img" src="{{ url_for('static', filename='profile_pics/' + current_user.image_file) }}">
+                            <div class="media-body">
+                                <div class="article-metadata">
+                                    <a class="mr-2" href="{{ url_for('account') }}">You</a> 
+                                    <small class="text-muted">{{ message.date_of_message.strftime('%Y-%m-%d') }}</small>
+                                </div>
+                                <p class="article-content">{{ message.message }}</p>
+                            </div>
+                        </article>
+                    {% else %}
+                        <article class="media content-section">
+                            <img class="rounded-circle article-img" src="{{ url_for('static', filename='profile_pics/' + current_receiver.image_file) }}">
+                            <div class="media-body">
+                                <div class="article-metadata">
+                                    <a class="mr-2" href="{{ url_for('account') }}">{{ current_receiver.username }}</a> 
+                                    <small class="text-muted">{{ message.date_of_message.strftime('%Y-%m-%d') }}</small>
+                                </div>
+                                <p class="article-content">{{ message.message }}</p>
+                            </div>
+                        </article>
+                    {% endif %}    
+                {% endfor %}
                 <div class="form-group">
                     {{ form.content.label(class="form-control-label") }}
                     {% if form.content.errors %}

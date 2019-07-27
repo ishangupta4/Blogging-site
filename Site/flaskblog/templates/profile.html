@@ -5,7 +5,7 @@
             <img class="rounded-circle account-img" src="{{ image_file }}"></img>
             <div class="media-body mb-3">
                 <h2 class="account-heading">{{ user.username }}</h2>
-                <a class="no-color mr-3" href="{{ url_for('messages', user_id=user.id )}}"><button type="button" class="btn btn-outline-info btn-sm mt-3">Message</button></a>
+                <a class="no-color mr-3" href="{{ url_for('messages', user_id=user.id,current_user_id=current_user.id )}}"><button type="button" class="btn btn-outline-info btn-sm mt-3">Message</button></a>
                 {% if is_connected%}
                     <button type="button" class="btn btn-outline-danger btn-sm mt-3"><a class="no-color white-hover" href="{{ url_for('connections', user_id = user.id) }}">Disconnect</a></button>
                 {% else %}
